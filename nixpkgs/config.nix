@@ -3,8 +3,6 @@
   pulseaudio = true;
 
   packageOverrides = pkgs: rec {
-    myEnv = pkgs.python.withPackages (ps: with ps; [ offlineimap pyyaml ]);
-
 		# Hold atom at 1.6.2, since it works.
 		atom = pkgs.lib.overrideDerivation pkgs.atom (attrs: {
       name = "atom-1.6.2";
