@@ -2,20 +2,29 @@
 
 rec {
   imports = [
-    ./hardware-configuration.nix
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
   ];
 
   boot = {
+    extraModulePackages = [ ];
+
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
+      ];
+
+      luks.devices = [
+        { device = "/dev/nvme0n1p3"; name = "cipher"; }
+      ];
+    };
+
+    kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_testing;
 
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    initrd.luks.devices = [
-      { device = "/dev/nvme0n1p3"; name = "cipher"; }
-    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -23,6 +32,18 @@ rec {
     wget
     zsh
   ];
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/b6b47ef1-0272-4af5-89ba-df3b6251439e";
+      fsType = "btrfs";
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/D600-4F06";
+      fsType = "vfat";
+    };
+  };
 
   fonts = {
     enableFontDir = true;
@@ -59,6 +80,10 @@ rec {
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  programs = {
+    zsh.enable = true;
+  };
 
   services = {
     locate.enable = true;
@@ -98,12 +123,16 @@ rec {
     };
   };
 
-  # The NixOS release to be compatible with for stateful data such as databases.
   system = {
     autoUpgrade.enable = true;
     copySystemConfiguration = true;
+    # The NixOS release to be compatible with for stateful data such as databases.
     stateVersion = "16.03";
   };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/b44bc529-a5ab-46c9-917b-378471473327"; }
+  ];
 
   time.timeZone = "America/Los_Angeles";
 
@@ -113,7 +142,7 @@ rec {
   };
 
   users = {
-    groups.money = { };
+    groups.sync = { };
 
     users.mythmon = {
       isNormalUser = true;
@@ -122,7 +151,7 @@ rec {
         "audio"
         "docker"
         "input"
-        "money"
+        "sync"
         "networkmanager"
         "video"
         "wheel"
