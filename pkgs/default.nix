@@ -7,6 +7,8 @@ let
 
   self = rec {
     flam3 = callPackage ./flam3 { };
+
+    firefox-nightly-bin = callPackage ./firefox-nightly-bin { };
   };
 
 in self
