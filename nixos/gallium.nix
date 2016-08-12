@@ -144,20 +144,26 @@ rec {
   users = {
     groups.sync = { };
 
-    users.mythmon = {
-      isNormalUser = true;
-      uid = 1000;
-      extraGroups = [
-        "audio"
-        "docker"
-        "input"
-        "sync"
-        "networkmanager"
-        "video"
-        "wheel"
-      ];
-      shell = "/run/current-system/sw/bin/zsh";
-      createHome = true;
+    users = {
+      mythmon = {
+        isNormalUser = true;
+        uid = 1000;
+        extraGroups = [
+          "audio"
+          "docker"
+          "input"
+          "sync"
+          "networkmanager"
+          "video"
+          "wheel"
+        ];
+        shell = "/run/current-system/sw/bin/zsh";
+        createHome = true;
+      };
+
+      syncthing = {
+        extraGroups = ["sync"];
+      };
     };
   };
 }
