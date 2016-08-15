@@ -74,7 +74,7 @@ rec {
     buildCores = 4;
     extraOptions = "auto-optimize-store = true";
     gc = {
-      automatic = true;
+      automatic = false;
       dates = "13:15";
     };
   };
