@@ -54,6 +54,7 @@ rec {
       fira-code
       font-awesome-ttf
       inconsolata
+      noto-fonts-emoji
       ubuntu_font_family
       unifont
     ];
