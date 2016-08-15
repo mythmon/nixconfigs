@@ -12,7 +12,7 @@ let
 
   firefox-nightly-bin = pkgs.wrapFirefox firefox-nightly-bin-unwrapped {
     browserName = "firefox";
-    name = "firefox-bin-nightly-" +
+    name = "firefox-nightly-bin-" +
       (builtins.parseDrvName firefox-nightly-bin-unwrapped.name).version;
     desktopName = "Nightly";
   };
