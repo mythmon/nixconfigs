@@ -3,7 +3,7 @@
 let
   baseUrl = "https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central";
 
-  firefox-nightly-bin-unwrapped = pkgs.callPackage <nixpkgs/pkgs/applications/networking/browsers/firefox-bin> {
+  firefox-nightly-bin-unwrapped = pkgs.callPackage "${pkgs.path}/pkgs/applications/networking/browsers/firefox-bin" {
     generated = import ./sources.nix;
     gconf = pkgs.gnome.GConf;
     inherit (pkgs.gnome) libgnome libgnomeui;
