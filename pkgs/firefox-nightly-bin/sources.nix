@@ -4,8 +4,8 @@
     {
       locale = "en-US";
       arch = "linux-x86_64";
-      url = "https://archive.mozilla.org/pub/firefox/nightly/2016/08/2016-08-17-03-02-02-mozilla-central/firefox-51.0a1.en-US.linux-x86_64.tar.bz2";
-      sha512 = "9dc234fd9c1d4c46e91d539c9a2a25d4001dc3857c618fd24034cf4c0fd87f3ad06cab6c2d3c574d7da918dbc9a56ba6c10263e882d99c64544dbe6514a0d1b7";
+      url = "https://archive.mozilla.org/pub/firefox/nightly/2016/08/2016-08-18-03-02-26-mozilla-central/firefox-51.0a1.en-US.linux-x86_64.tar.bz2";
+      sha512 = "a0bc12248d0200196cf6271d69c59d25d500bd1b0c5776071fbb6498958d61058b670de2dee48637471f3bfea42560bc509795716e187f715cde8178d870723f";
     }
   ];
 }
