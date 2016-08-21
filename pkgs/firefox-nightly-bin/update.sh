@@ -20,13 +20,16 @@ if [[ -z $TS ]]; then
   YEAR=$(date --date=yesterday +%Y)
   MONTH=$(date --date=yesterday +%m)
   DAY=$(date --date=yesterday +%d)
-  echo "Can't find build for today, trying yesterday" >&2
+  echo -n "Can't find build for today, trying yesterday..." >&2
 
   TS=$(curl -s $BASEURL/$YEAR/$MONTH/ | sed -ne "s/.*$YEAR-$MONTH-$DAY-\(..-..-..\)-mozilla-central\/.*/\\1/p" | head -n 1)
 
   if [[ -z $TS ]]; then
-   echo "Couldn't find mozilla-central build for $ORIG_YEAR-$ORIG_MONTH-$ORIG_DAY or $YEAR-$MONTH-$DAY at $BASEURL/"
-   exit 1
+    echo
+    echo "Couldn't find mozilla-central build for $ORIG_YEAR-$ORIG_MONTH-$ORIG_DAY or $YEAR-$MONTH-$DAY at $BASEURL/"
+    exit 1
+ else
+   echo " Found" >&2
  fi
 fi
 
@@ -34,7 +37,7 @@ DIRURL="$BASEURL/$YEAR/$MONTH/$YEAR-$MONTH-$DAY-$TS-mozilla-central"
 SHA512=$(curl -s $DIRURL/$BASE_FILENAME.checksums | grep sha512 | grep "$TARBZ$" | cut -d ' ' -f 1-1)
 
 echo "{
-  version = \"$VERSION\";
+  version = \"$VERSION-$YEAR-$MONTH-$DAY\";
   sources = [
     {
       locale = \"$LOCALE\";
