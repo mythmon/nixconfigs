@@ -1,5 +1,5 @@
 {
-  version = "51.0a1";
+  version = "51.0a1-2016-08-20";
   sources = [
     {
       locale = "en-US";
