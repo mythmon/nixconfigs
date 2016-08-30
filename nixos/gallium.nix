@@ -95,7 +95,11 @@ rec {
 
     locate = {
       enable = true;
+      extraFlags = [
+        "--prunepaths='/data/@oldlaptop-mut'"
+      ];
       includeStore = true;
+      interval = "hourly";
     };
 
     pcscd.enable = true; # For yubikey
