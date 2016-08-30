@@ -9,6 +9,8 @@ let
     flam3 = callPackage ./flam3 { };
 
     firefox-nightly-bin = callPackage ./firefox-nightly-bin { };
+
+    firefox-unbranded-bin = callPackage ./firefox-unbranded-bin { };
   };
 
 in self
