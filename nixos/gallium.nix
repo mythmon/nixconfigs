@@ -93,7 +93,7 @@ rec {
   services = {
     chrony.enable = true;
 
-    locate.enable = {
+    locate = {
       enable = true;
       includeStore = true;
     };
