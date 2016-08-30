@@ -3,7 +3,9 @@
 rec {
   allowUnfreePredicate = pkg: (
     pkgs.lib.hasPrefix "firefox-" pkg.name ||
-    pkgs.lib.hasPrefix "steam-" pkg.name
+    pkgs.lib.hasPrefix "steam-" pkg.name ||
+    pkgs.lib.hasPrefix "corefonts-" pkg.name ||
+    pkgs.lib.hasPrefix "spotify-" pkg.name
   );
   pulseaudio = true;
 

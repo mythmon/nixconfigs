@@ -6,8 +6,6 @@ rec {
   ];
 
   boot = {
-    extraModulePackages = [ ];
-
     initrd = {
       availableKernelModules = [
         "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
@@ -19,7 +17,7 @@ rec {
     };
 
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages_4_7;
 
     loader = {
       systemd-boot.enable = true;
@@ -66,6 +64,12 @@ rec {
   };
 
   networking = {
+    firewall = {
+      allowedTCPPorts = [
+        8000 # Web stuff
+        22000 # Syncthing
+      ];
+    };
     hostName = "gallium";
     networkmanager.enable = true;
   };
@@ -87,11 +91,26 @@ rec {
   };
 
   services = {
-    locate.enable = true;
+    chrony.enable = true;
+
+    locate.enable = {
+      enable = true;
+      includeStore = true;
+    };
+
     pcscd.enable = true; # For yubikey
+
     postgresql.enable = true;
+
     printing.enable = true;
-    syncthing.enable = true;
+
+    ntp.enable = false;
+
+    syncthing = {
+      enable = true;
+      useInotify = true;
+    };
+
     tlp.enable = true; # For power management
 
     xserver = {
