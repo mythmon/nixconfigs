@@ -160,9 +160,13 @@ rec {
 
   time.timeZone = "America/Los_Angeles";
 
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
+  virtualisation = {
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+    };
+
+    virtualbox.host.enable = true;
   };
 
   users = {
