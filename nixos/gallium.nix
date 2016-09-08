@@ -99,6 +99,8 @@ rec {
   };
 
   services = {
+    avahi.enable = true;
+
     chrony.enable = true;
 
     locate = {
@@ -114,7 +116,10 @@ rec {
 
     postgresql.enable = true;
 
-    printing.enable = true;
+    printing = {
+      drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+      enable = true;
+    };
 
     ntp.enable = false;
 
