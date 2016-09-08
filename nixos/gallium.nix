@@ -87,7 +87,12 @@ rec {
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      pulseaudio = true;
+    };
+  };
 
   programs = {
     zsh.enable = true;
