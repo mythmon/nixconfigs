@@ -59,7 +59,10 @@ rec {
   };
 
   hardware = {
-    opengl.driSupport32Bit = true;
+    opengl = {
+      driSupport32Bit = true;
+      extraPackages = [ pkgs.vaapiIntel ];
+    };
     pulseaudio.enable = true;
   };
 
