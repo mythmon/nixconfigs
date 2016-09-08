@@ -5,9 +5,10 @@ rec {
     pkgs.lib.hasPrefix "firefox-" pkg.name ||
     pkgs.lib.hasPrefix "steam-" pkg.name ||
     pkgs.lib.hasPrefix "corefonts-" pkg.name ||
-    pkgs.lib.hasPrefix "spotify-" pkg.name
+    pkgs.lib.hasPrefix "spotify-" pkg.name ||
+    pkgs.lib.hasPrefix "flashplayer-" pkg.name ||
+    pkgs.lib.hasPrefix "google-talk-plugin-" pkg.name
   );
-  pulseaudio = true;
 
   packageOverrides = pkgs: rec {
     # Hold atom at 1.6.2, since it works.
@@ -20,4 +21,16 @@ rec {
       };
     });
   };
+
+  firefox = {
+    enableGoogleTalkPlugin = true;
+    enableAdobeFlash = true;
+  };
+
+  chromium = {
+    enablePepperFlash = true;
+    enablePepperPDF = true;
+  };
+
+  pulseaudio = true;
 }
