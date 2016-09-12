@@ -63,7 +63,10 @@ rec {
       driSupport32Bit = true;
       extraPackages = [ pkgs.vaapiIntel ];
     };
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
   };
 
   networking = {
