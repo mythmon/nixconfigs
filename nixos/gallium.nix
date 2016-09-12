@@ -179,7 +179,7 @@ rec {
       storageDriver = "btrfs";
     };
 
-    virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
   };
 
   users = {
