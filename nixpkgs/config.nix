@@ -7,7 +7,8 @@ rec {
     pkgs.lib.hasPrefix "corefonts-" pkg.name ||
     pkgs.lib.hasPrefix "spotify-" pkg.name ||
     pkgs.lib.hasPrefix "flashplayer-" pkg.name ||
-    pkgs.lib.hasPrefix "google-talk-plugin-" pkg.name
+    pkgs.lib.hasPrefix "google-talk-plugin-" pkg.name ||
+    pkgs.lib.hasPrefix "minecraft-" pkg.name
   );
 
   firefox = {
