@@ -11,6 +11,8 @@ let
     firefox-nightly-bin = callPackage ./firefox-nightly-bin { };
 
     firefox-unbranded-bin = callPackage ./firefox-unbranded-bin { };
+
+    ripgrep = callPackage ./ripgrep { };
   };
 
 in self
