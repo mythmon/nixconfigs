@@ -6,6 +6,8 @@ let
   callPackage = pkgs.lib.callPackageWith (pkgs // self);
 
   self = rec {
+    btrfs-snap = callPackage ./btrfs-snap { };
+
     flam3 = callPackage ./flam3 { };
 
     firefox-nightly-bin = callPackage ./firefox-nightly-bin { };
