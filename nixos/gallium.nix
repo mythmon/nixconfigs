@@ -92,27 +92,7 @@ rec {
   };
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-      pulseaudio = true;
-
-      packageOverrides = pkgs: {
-        steamcontroller-udev-rules = pkgs.writeTextFile {
-          name = "steamcontroller-udev-rules";
-          text = ''
-            # This rule is needed for basic functionality of the controller in
-            # Steam and keyboard/mouse emulation
-            SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", MODE="0666"
-
-            # This rule is necessary for gamepad emulation
-            KERNEL=="uinput", MODE="0660", GROUP="wheel", OPTIONS+="static_node=uinput"
-            # systemd option not yet tested
-            #KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", TAG+="udev-acl"
-          '';
-          destination = "/etc/udev/rules.d/99-steamcontroller.rules";
-        };
-      };
-    };
+    config = (import ./../nixpkgs/config.nix { pkgs = pkgs; });
   };
 
   programs = {
