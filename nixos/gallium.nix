@@ -107,7 +107,7 @@ rec {
     locate = {
       enable = true;
       extraFlags = [
-        "--prunepaths='/nix/store /data/@oldlaptop-mut'"
+        "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
       ];
       interval = "hourly";
     };
