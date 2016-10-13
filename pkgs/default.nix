@@ -10,7 +10,13 @@ let
 
     flam3 = callPackage ./flam3 { };
 
-    firefox-nightly-bin = callPackage ./firefox-nightly-bin { };
+    firefox-nightly-bin = callPackage ./firefox-bin {
+      browserName = "nightly";
+    };
+
+    firefox-aurora-bin = callPackage ./firefox-bin {
+      browserName = "aurora";
+    };
 
     firefox-unbranded-bin = callPackage ./firefox-unbranded-bin { };
 

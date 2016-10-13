@@ -3,8 +3,8 @@
 let
   firefox-unbranded-bin-unwrapped = pkgs.callPackage "${pkgs.path}/pkgs/applications/networking/browsers/firefox-bin" {
     generated = import ./sources.nix;
-    gconf = pkgs.gnome.GConf;
-    inherit (pkgs.gnome) libgnome libgnomeui;
+    gconf = pkgs.gnome2.GConf;
+    inherit (pkgs.gnome2) libgnome libgnomeui;
     inherit (pkgs.gnome3) defaultIconTheme;
   };
 
