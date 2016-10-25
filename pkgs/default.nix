@@ -21,6 +21,8 @@ let
     firefox-unbranded-bin = callPackage ./firefox-unbranded-bin { };
 
     ripgrep = callPackage ./ripgrep { };
+
+    yarn = callPackage ./yarn { };
   };
 
 in self
