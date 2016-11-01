@@ -125,6 +125,12 @@ rec {
 
     ntp.enable = false;
 
+    redshift = {
+      enable = true;
+      latitude = "45.5";
+      longitude = "-122.5";
+    };
+
     syncthing = {
       enable = true;
       useInotify = true;
