@@ -60,6 +60,7 @@ rec {
   };
 
   hardware = {
+    bluetooth.enable = true;
     opengl = {
       driSupport32Bit = true;
       extraPackages = [ pkgs.vaapiIntel ];
@@ -67,6 +68,7 @@ rec {
     pulseaudio = {
       enable = true;
       support32Bit = true;
+      package = pkgs.pulseaudioFull;
     };
   };
 
