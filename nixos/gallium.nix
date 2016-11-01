@@ -6,6 +6,8 @@ rec {
   ];
 
   boot = {
+    cleanTmpDir = true;
+
     initrd = {
       availableKernelModules = [
         "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
@@ -23,6 +25,8 @@ rec {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+
+    tmpOnTmpfs = true;
   };
 
   environment.systemPackages = with pkgs; [
