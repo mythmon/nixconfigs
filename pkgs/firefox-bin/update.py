@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p python36 python36Packages.beautifulsoup4 python36Packages.requests2
+#!nix-shell -i python3 -p python35 python35Packages.beautifulsoup4 python35Packages.requests2
 
 import os
 import re
@@ -36,7 +36,7 @@ def get_latest_build_for_date(channel, ts):
 
 
 def get_potential_builds_for_date(channel, ts):
-    res = requests.get(f"{BASE_URL}/{BASE_PATH}/{ts.year}/{ts.month}/")
+    res = requests.get("{}/{}/{}/{}/".format(BASE_URL, BASE_PATH, ts.year, ts.month))
     res.raise_for_status()
     doc = BeautifulSoup(res.text, 'html.parser')
 
@@ -45,14 +45,15 @@ def get_potential_builds_for_date(channel, ts):
     for tag in doc.select('a'):
         href = tag.get('href').rstrip('/')
         target = href.split('/')[-1]
-        if re.match(rf'^{ts.year}-{ts.month}-{ts.day}-\d\d-\d\d-\d\d-{channel_to_dir[channel]}$', target):
+        if re.match(r'^{ts.year}-{ts.month}-{ts.day}-\d\d-\d\d-\d\d-{dir}$'
+                    .format(ts=ts, dir=channel_to_dir[channel]), target):
             potential_builds.append(tag['href'])
 
     return reversed(sorted(potential_builds))
 
 
 def get_build(href):
-    res = requests.get(f"{BASE_URL}/{href}")
+    res = requests.get("{}/{}".format(BASE_URL, href))
     res.raise_for_status()
     doc = BeautifulSoup(res.text, 'html.parser')
 
@@ -80,7 +81,7 @@ class Build:
         \.tar\.bz2
     ''', re.X)
 
-    def __init__(self, *, ts, version, sha512, arch, url, locale):
+    def __init__(self, ts, version, sha512, arch, url, locale):
         self.ts = ts
         self.version = version
         self.sha512 = sha512
@@ -93,14 +94,14 @@ class Build:
         dir_name = url.split('/')[-2]
         ts = datetime.strptime(dir_name[:19], '%Y-%m-%d-%H-%M-%S')
 
-        res = requests.get(f'{BASE_URL}{url}')
+        res = requests.get(BASE_URL + url)
         res.raise_for_status()
 
         for line in res.text.split('\n'):
             if not line:
                 continue
             hash, type, size, filename = line.split(' ')
-            url = f'{BASE_URL}{os.path.dirname(url)}/{filename}'
+            url = BASE_URL + os.path.dirname(url) + '/' + filename
             if type != 'sha512':
                 continue
             match = cls.tarball_re.match(filename)
@@ -110,7 +111,7 @@ class Build:
         raise NoBuildFoundException()
 
     def __str__(self):
-        return dedent(f"""\
+        return dedent("""\
             {{
               version = "{self.version}-{self.ts.year}-{self.ts.month}-{self.ts.day}";
               sources = [
@@ -122,16 +123,13 @@ class Build:
                 }}
               ];
             }}\
-        """)
+        """.format(self=self))
 
 
 nightly = get_latest_build_for_date('nightly', datetime.now())
 aurora = get_latest_build_for_date('aurora', datetime.now())
 
-print(dedent(f"""\
-    {{
-      aurora = {indent(str(aurora), '      ').strip()};
-
-      nightly = {indent(str(nightly), '      ').strip()};
-    }}\
-"""))
+print('{')
+print('  aurora = ' + indent(str(aurora), '  ').strip() + ';')
+print('  nightly = ' + indent(str(nightly), '  ').strip() + ';')
+print('}')
