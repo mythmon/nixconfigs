@@ -53,6 +53,20 @@
       interval = "hourly";
     };
 
+    nginx = {
+      enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts = {
+        "mythmon.com" = {
+          globalRedirect = "www.mythmon.com";
+        };
+      };
+    };
+
     ntp.enable = false;
 
     openssh.enable = true;
