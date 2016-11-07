@@ -39,6 +39,7 @@
   };
 
   programs = {
+    mosh.enable = true;
     zsh.enable = true;
   };
 
