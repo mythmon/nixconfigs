@@ -16,7 +16,10 @@
 
   environment.systemPackages = with pkgs; [
     git
+    httpie
+    tmux
     vim
+    weechat
     zsh
   ];
 
