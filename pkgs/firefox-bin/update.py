@@ -36,17 +36,19 @@ def get_latest_build_for_date(channel, ts):
 
 
 def get_potential_builds_for_date(channel, ts):
-    res = requests.get("{}/{}/{}/{}/".format(BASE_URL, BASE_PATH, ts.year, ts.month))
+    url = "{}/{}/{}/{}/".format(BASE_URL, BASE_PATH, ts.year, ts.month)
+    res = requests.get(url)
     res.raise_for_status()
     doc = BeautifulSoup(res.text, 'html.parser')
 
     potential_builds = []
 
+    link_re = re.compile(r'^{ts.year}-{ts.month:0>2}-{ts.day:0>2}-\d\d-\d\d-\d\d-{dir}$'
+                         .format(ts=ts, dir=channel_to_dir[channel]))
     for tag in doc.select('a'):
         href = tag.get('href').rstrip('/')
         target = href.split('/')[-1]
-        if re.match(r'^{ts.year}-{ts.month}-{ts.day}-\d\d-\d\d-\d\d-{dir}$'
-                    .format(ts=ts, dir=channel_to_dir[channel]), target):
+        if link_re.match(target):
             potential_builds.append(tag['href'])
 
     return reversed(sorted(potential_builds))
