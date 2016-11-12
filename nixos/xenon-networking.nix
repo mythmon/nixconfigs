@@ -16,6 +16,7 @@
           { address="10.17.0.5"; prefixLength=16; }
         ];
         ip6 = [
+        { address="2604:a880:800:10::1ce7:d001"; prefixLength=60; }
         ];
       };
       eth1 = {
