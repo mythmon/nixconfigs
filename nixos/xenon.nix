@@ -15,6 +15,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    aspell
+    aspellDicts.en
+    bind
     git
     httpie
     tmux
