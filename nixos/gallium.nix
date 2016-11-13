@@ -3,11 +3,10 @@
 rec {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    ./base.nix
   ];
 
   boot = {
-    cleanTmpDir = true;
-
     initrd = {
       availableKernelModules = [
         "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
@@ -25,15 +24,10 @@ rec {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    tmpOnTmpfs = true;
   };
 
   environment.systemPackages = with pkgs; [
     steamcontroller-udev-rules
-    vim
-    wget
-    zsh
   ];
 
   fileSystems = {
@@ -90,28 +84,16 @@ rec {
   nix = {
     maxJobs = 4;
     buildCores = 4;
-    extraOptions = "auto-optimize-store = true";
-    gc = {
-      automatic = false;
-      dates = "13:15";
-    };
   };
 
   nixpkgs = {
     config = (import ./../nixpkgs/config.nix { pkgs = pkgs; });
   };
 
-  programs = {
-    zsh.enable = true;
-  };
-
   services = {
     avahi.enable = true;
 
-    chrony.enable = true;
-
     locate = {
-      enable = true;
       extraFlags = [
         "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
       ];
@@ -126,8 +108,6 @@ rec {
       drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
       enable = true;
     };
-
-    ntp.enable = false;
 
     redshift = {
       enable = true;
@@ -169,13 +149,6 @@ rec {
         pkgs.steamcontroller-udev-rules
       ];
     };
-  };
-
-  system = {
-    autoUpgrade.enable = true;
-    copySystemConfiguration = true;
-    # The NixOS release to be compatible with for stateful data such as databases.
-    stateVersion = "16.03";
   };
 
   swapDevices = [
