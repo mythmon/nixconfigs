@@ -3,7 +3,7 @@
 rec {
   imports = [
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
-    ./xenon-networking.nix
+    ./base.nix
   ];
 
   boot = {
