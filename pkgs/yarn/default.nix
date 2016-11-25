@@ -1,20 +1,27 @@
-{ pkgs, stdenv, fetchFromGitHub, python, utillinux }:
+{ stdenv, fetchurl }:
 
-with stdenv.lib;
+stdenv.mkDerivation rec {
+  name = "yarn-${version}";
+  version = "0.17.8";
 
-let
-  nodePackages = pkgs.callPackage "${pkgs.path}/pkgs/top-level/node-packages.nix" {
-    self = nodePackages;
-    generated = ./package.nix;
+  src = fetchurl {
+    url = "https://github.com/yarnpkg/yarn/releases/download/v${version}/yarn-v${version}.tar.gz";
+    sha256 = "072lkfbsgwlqch6ymrdcmw2sw6krqcww5ydhqqizpwal58p7ckmm";
   };
-  yarn = nodePackages.by-version."yarn"."0.16.1";
 
-in yarn.override rec {
+  phases = [ "installPhase" ];
+
+  installPhase = ''
+    mkdir -p $out
+    cd $out
+    tar xzvf $src --strip-components 1
+    patchShebangs $out/bin/yarn
+  '';
+
   meta = {
-    description = "Fast, reliable, and secure dependency management.";
-    license = licenses.bsd2;
-    homepage = https://yarnpkg.com;
-    maintainers = with maintainers; [ mythmon ];
-    platforms = platforms.unix;
+    description = "Fast, reliable, and secure dependency management for JavaScript";
+    homepage = "https://yarnpkg.com/";
+    license = stdenv.lib.licenses.bsd2;
   };
 }
+
