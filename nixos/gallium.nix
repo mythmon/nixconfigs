@@ -160,9 +160,8 @@ rec {
   virtualisation = {
     docker = {
       enable = true;
-      storageDriver = "btrfs";
+      storageDriver = "devicemapper";
     };
-
     virtualbox.host.enable = false;
   };
 
