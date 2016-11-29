@@ -1,6 +1,10 @@
-{ config, pkgs, fetchurl, lib, ... }:
+{ pkgs, ... }:
 
-rec {
+let
+
+  mypkgs = import ../pkgs/default.nix { };
+
+in rec {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ./base.nix
@@ -27,7 +31,83 @@ rec {
   };
 
   environment.systemPackages = with pkgs; [
+    mypkgs.ripgrep
+
+    acpi
+    arandr
+    ascii
+    atom
+    bc
+    compton
+    cpufrequtils
+    dmenu
+    dzen2
+    evince
+    file
+    firefox
+    gimp
+    git
+    gitAndTools.diff-so-fancy
+    gitAndTools.hub
+    gnome3.vinagre
+    gnumeric
+    gnupg1compat
+    hsetroot
+    htop
+    httpie
+    i3lock
+    iftop
+    inkscape
+    iotop
+    ipfs
+    iw
+    jq
+    keybase
+    keychain
+    lftp
+    lm_sensors
+    lsof
+    mercurial
+    moreutils
+    mosh
+    mplayer
+    mtr
+    ncdu
+    networkmanagerapplet
+    nix-prefetch-scripts
+    nix-zsh-completions
+    nodejs
+    nox
+    openvpn
+    p7zip
+    pass
+    patchelf
+    pavucontrol
+    pciutils
+    playerctl
+    powertop
+    pwgen
+    scrot
+    sgtpuzzles
     steamcontroller-udev-rules
+    spotify
+    sshfs-fuse
+    stalonetray
+    steam
+    termite
+    tig
+    tree
+    units
+    unzip
+    usbutils
+    vim_configurable
+    vlc
+    watch
+    xclip
+    xorg.xbacklight
+    xorg.xev
+    yabar
+    zip
   ];
 
   fileSystems = {
@@ -87,7 +167,7 @@ rec {
   };
 
   nixpkgs = {
-    config = (import ./../nixpkgs/config.nix { pkgs = pkgs; });
+    config = (import ../nixpkgs/config.nix { pkgs = pkgs; });
   };
 
   services = {
