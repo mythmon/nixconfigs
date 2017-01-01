@@ -3,6 +3,7 @@
 let
 
   mypkgs = import ../pkgs/default.nix { };
+  mozpkgs = import ../../nixpkgs-mozilla/default.nix { };
 
 in rec {
   imports = [
@@ -33,6 +34,8 @@ in rec {
   environment.systemPackages = with pkgs; [
     mypkgs.ripgrep
 
+    mozpkgs.firefox-nightly-bin
+
     acpi
     arandr
     ascii
@@ -47,7 +50,6 @@ in rec {
     dzen2
     evince
     file
-    firefox
     gimp
     git
     gitAndTools.diff-so-fancy
