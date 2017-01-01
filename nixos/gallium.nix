@@ -38,9 +38,12 @@ in rec {
     ascii
     atom
     bc
+    bind
+    chromium
     compton
     cpufrequtils
     dmenu
+    graphviz
     dzen2
     evince
     file
@@ -86,11 +89,11 @@ in rec {
     pciutils
     playerctl
     powertop
+    python3
     pwgen
     scrot
     sgtpuzzles
-    steamcontroller-udev-rules
-    spotify
+    skype
     sshfs-fuse
     stalonetray
     steam
@@ -103,6 +106,7 @@ in rec {
     vim_configurable
     vlc
     watch
+    watchman
     xclip
     xorg.xbacklight
     xorg.xev
@@ -226,7 +230,6 @@ in rec {
       packages = [
         pkgs.libu2f-host
         pkgs.yubikey-personalization
-        pkgs.steamcontroller-udev-rules
       ];
     };
   };
