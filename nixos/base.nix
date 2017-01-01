@@ -10,7 +10,6 @@ rec {
     git
     httpie
     tmux
-    vim
     wget
     zsh
   ];

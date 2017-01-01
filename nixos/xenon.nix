@@ -14,6 +14,7 @@ rec {
     aspell
     aspellDicts.en
     bind
+    vim
     weechat
   ];
 
