@@ -144,6 +144,7 @@ in rec {
   hardware = {
     bluetooth.enable = true;
     opengl = {
+      driSupport = true;
       driSupport32Bit = true;
       extraPackages = [ pkgs.vaapiIntel ];
     };
