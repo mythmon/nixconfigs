@@ -187,6 +187,26 @@ in rec {
       interval = "hourly";
     };
 
+    mopidy = {
+      enable = true;
+      configuration = ''
+        [http]
+        enabled = true
+        hostname = 127.0.0.1
+        port = 6680
+
+        [mpd]
+        enabled = true
+        hostname = 127.0.0.1
+        port = 6600
+
+        [file]
+        enabled = true
+        media_dirs =
+            /home/mythmon/music
+      '';
+    };
+
     pcscd.enable = true; # For yubikey
 
     postgresql.enable = true;
