@@ -34,7 +34,7 @@ in rec {
   environment.systemPackages = with pkgs; [
     mypkgs.ripgrep
 
-    mozpkgs.firefox-nightly-bin
+    mozpkgs.firefox-developer-bin
 
     acpi
     arandr
