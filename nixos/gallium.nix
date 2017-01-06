@@ -99,6 +99,7 @@ in rec {
     sshfs-fuse
     stalonetray
     steam
+    taskwarrior
     termite
     tig
     tree
