@@ -181,12 +181,10 @@ in rec {
   services = {
     avahi.enable = true;
 
-    locate = {
-      extraFlags = [
-        "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
-      ];
-      interval = "hourly";
-    };
+    # Too much difficulty getting this to be performant
+    # TODO: prunt git and hg directories?
+    locate.enable = false;
+    # locate.extraFlags = "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
 
     mopidy = {
       enable = true;
@@ -255,6 +253,46 @@ in rec {
         pkgs.libu2f-host
         pkgs.yubikey-personalization
       ];
+    };
+  };
+
+  systemd = let
+    btrfs-snap-service = interval: count: {
+      description = "Snapshot BTRFS root (${interval})";
+      path = [
+        mypkgs.btrfs-snap
+        pkgs.utillinux
+        pkgs.perl
+        pkgs.btrfs-progs
+      ];
+      script = "btrfs-snap -r / ${interval} ${count}";
+    };
+
+    btrfs-snap-timer = interval: {
+      description = "Timer for snapshot BTRFS root";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = interval;
+        OnUnitActiveSec = interval;
+        Unit = "btrfs-snap-${interval}.service";
+      };
+    };
+
+  in {
+    services = {
+      btrfs-snap-1m = btrfs-snap-service "1m" "5";
+      btrfs-snap-5m = btrfs-snap-service "5m" "12";
+      btrfs-snap-1h = btrfs-snap-service "1h" "8";
+      btrfs-snap-1d = btrfs-snap-service "1d" "7";
+      btrfs-snap-1w = btrfs-snap-service "1w" "52";
+    };
+
+    timers = {
+      btrfs-snap-1m = btrfs-snap-timer "1m";
+      btrfs-snap-5m = btrfs-snap-timer "5m";
+      btrfs-snap-1h = btrfs-snap-timer "1h";
+      btrfs-snap-1d = btrfs-snap-timer "1d";
+      btrfs-snap-1w = btrfs-snap-timer "1w";
     };
   };
 
