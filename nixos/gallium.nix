@@ -183,7 +183,6 @@ in rec {
 
     # Too much difficulty getting this to be performant
     # TODO: prunt git and hg directories?
-    locate.enable = false;
     # locate.extraFlags = "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
 
     mopidy = {
@@ -280,15 +279,13 @@ in rec {
 
   in {
     services = {
-      btrfs-snap-1m = btrfs-snap-service "1m" "5";
-      btrfs-snap-5m = btrfs-snap-service "5m" "12";
-      btrfs-snap-1h = btrfs-snap-service "1h" "8";
-      btrfs-snap-1d = btrfs-snap-service "1d" "7";
+      btrfs-snap-5m = btrfs-snap-service "5m" "18";
+      btrfs-snap-1h = btrfs-snap-service "1h" "36";
+      btrfs-snap-1d = btrfs-snap-service "1d" "11";
       btrfs-snap-1w = btrfs-snap-service "1w" "52";
     };
 
     timers = {
-      btrfs-snap-1m = btrfs-snap-timer "1m";
       btrfs-snap-5m = btrfs-snap-timer "5m";
       btrfs-snap-1h = btrfs-snap-timer "1h";
       btrfs-snap-1d = btrfs-snap-timer "1d";

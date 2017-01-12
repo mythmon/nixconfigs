@@ -29,7 +29,11 @@ rec {
 
   services = {
     chrony.enable = true;
-    locate.enable = true;
+
+    # Too much difficulty getting this to be performant
+    # TODO: prunt git and hg directories?
+    locate.enable = false;
+
     ntp.enable = false;
   };
 
