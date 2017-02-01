@@ -43,6 +43,7 @@ in rec {
     atom
     bc
     bind
+    binutils
     chromium
     compton
     cpufrequtils
@@ -94,6 +95,7 @@ in rec {
     powertop
     python3
     pwgen
+    rxvt_unicode
     scrot
     sgtpuzzles
     skype

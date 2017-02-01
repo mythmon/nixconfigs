@@ -3,6 +3,8 @@
 rec {
   allowUnfree = true;
 
+  allowBroken = false;
+
   chromium = {
     enablePepperFlash = true;
     enablePepperPDF = true;
