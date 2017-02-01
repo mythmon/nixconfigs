@@ -243,7 +243,17 @@ in rec {
 
     pcscd.enable = true; # For yubikey
 
-    postgresql.enable = true;
+    postgresql = {
+      enable = true;
+
+      extraConfig = ''
+        listen_addresses='127.0.0.1,172.17.0.1'
+      '';
+
+      authentication = ''
+        host  all all 172.17.0.1/16 md5
+      '';
+    };
 
     printing = {
       drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
@@ -336,11 +346,8 @@ in rec {
   time.timeZone = "America/Los_Angeles";
 
   virtualisation = {
-    docker = {
-      enable = true;
-      storageDriver = "devicemapper";
-    };
-    virtualbox.host.enable = false;
+    docker.enable = true;
+    virtualbox.host.enable = true;
   };
 
   users = {
