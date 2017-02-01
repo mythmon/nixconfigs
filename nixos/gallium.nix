@@ -122,7 +122,7 @@ in rec {
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/b6b47ef1-0272-4af5-89ba-df3b6251439e";
+      device = "/dev/disk/by-uuid/fe7f9b08-4138-48df-913d-0bde0c937132";
       fsType = "btrfs";
     };
 
