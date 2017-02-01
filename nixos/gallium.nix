@@ -4,6 +4,7 @@ let
 
   mypkgs = import ../pkgs/default.nix { };
   mozpkgs = import ../../nixpkgs-mozilla/default.nix { };
+  secrets = import ./secrets.nix;
 
 in rec {
   imports = [
@@ -146,15 +147,22 @@ in rec {
 
   hardware = {
     bluetooth.enable = true;
+
     opengl = {
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = [ pkgs.vaapiIntel ];
     };
+
     pulseaudio = {
       enable = true;
       support32Bit = true;
+      systemWide = false;
       package = pkgs.pulseaudioFull;
+      tcp = {
+        anonymousClients.allowedIpRanges = [ "127.0.0.1" ];
+        enable = true;
+      };
     };
   };
 
@@ -187,7 +195,16 @@ in rec {
 
     mopidy = {
       enable = true;
+
+      extensionPackages = [
+        pkgs.mopidy-moped
+        pkgs.mopidy-gmusic
+      ];
+
       configuration = ''
+        [audio]
+        output = pulsesink server=127.0.0.1
+
         [http]
         enabled = true
         hostname = 127.0.0.1
@@ -198,10 +215,27 @@ in rec {
         hostname = 127.0.0.1
         port = 6600
 
+        [local]
+        enabled = true
+        media_dir = /data/music
+
         [file]
         enabled = true
         media_dirs =
-            /home/mythmon/music
+          /data/music
+
+        [gmusic]
+        radio_tracks_count = 25
+        all_access = true
+        bitrate = 320
+        username = mythmon@gmail.com
+        password = ${secrets.google-mopidy-app-password}
+        radio_stations_in_browse = true
+        radio_stations_as_playlists = true
+        radio_stations_count = 10
+        deviceid = ${secrets.google-mopidy-device-id}
+        refresh_library = 1440
+        refresh_playlists = 60
       '';
     };
 
