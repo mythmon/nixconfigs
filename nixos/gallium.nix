@@ -277,6 +277,8 @@ in rec {
       enable = true;
       windowManager.herbstluftwm.enable = true;
       displayManager.slim = {
+        autoLogin = true;
+        defaultUser = "mythmon";
         enable = true;
       };
 
