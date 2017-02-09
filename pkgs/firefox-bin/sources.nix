@@ -1,15 +1,4 @@
 {
-  aurora = {
-    version = "52.0a2-2016-11-24";
-    sources = [
-      {
-        locale = "en-US";
-        arch = "linux-x86_64";
-        url = "https://archive.mozilla.org/pub/firefox/nightly/2016/11/2016-11-24-00-40-20-mozilla-aurora/firefox-52.0a2.en-US.linux-x86_64.tar.bz2";
-        sha512 = "ec6b727c1c473e38cbaf34f9debb48e99e8e8705e11808a4c7a1974b0940e81a4fb762b3114f2b4e46628e024b67a3e2e4f07d571c29867c2ce94b846a64551b";
-      }
-    ];
-  };
   nightly = {
     version = "53.0a1-2016-11-24";
     sources = [
