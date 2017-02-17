@@ -145,13 +145,13 @@ class Build:
     def __str__(self):
         return dedent(f'''\
             {{
-              version = '{self.version}-{self.ts.year}-{self.ts.month}-{self.ts.day}';
+              version = "{self.version}-{self.ts.year}-{self.ts.month}-{self.ts.day}";
               sources = [
                 {{
-                  locale = '{self.locale}';
-                  arch = '{self.arch}';
-                  url = '{self.url}';
-                  sha512 = '{self.sha512}';
+                  locale = "{self.locale}";
+                  arch = "{self.arch}";
+                  url = "{self.url}";
+                  sha512 = "{self.sha512}";
                 }}
               ];
             }}\
