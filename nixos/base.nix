@@ -9,7 +9,6 @@ rec {
   environment.systemPackages = with pkgs; [
     git
     httpie
-    ripgrep
     tmux
     wget
     zsh

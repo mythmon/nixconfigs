@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
-rec {
+let
+
+  mypkgs = import ../pkgs/default.nix { };
+
+in rec {
   imports = [
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
     ./base.nix
@@ -11,6 +15,8 @@ rec {
   };
 
   environment.systemPackages = with pkgs; [
+    mypkgs.ripgrep
+
     aspell
     aspellDicts.en
     bind

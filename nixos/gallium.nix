@@ -97,6 +97,7 @@ in rec {
     powertop
     python3
     pwgen
+    ripgrep
     rxvt_unicode
     scrot
     sgtpuzzles
