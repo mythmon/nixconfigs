@@ -24,7 +24,11 @@ in rec {
     };
 
     kernelModules = [ "kvm-intel" ];
+
     kernelPackages = pkgs.linuxPackages_latest;
+
+    # Hack for Docker compatibility with systemd 232
+    kernelParams = ["systemd.legacy_systemd_cgroup_controller=yes"];
 
     loader = {
       systemd-boot.enable = true;
@@ -33,9 +37,7 @@ in rec {
   };
 
   environment.systemPackages = with pkgs; [
-    mypkgs.ripgrep
-
-    mozpkgs.firefox-developer-bin
+    mypkgs.firefox-nightly-bin
 
     acpi
     arandr
@@ -201,6 +203,7 @@ in rec {
       extensionPackages = [
         pkgs.mopidy-moped
         pkgs.mopidy-gmusic
+        pkgs.mopidy-spotify
       ];
 
       configuration = ''
@@ -231,13 +234,20 @@ in rec {
         all_access = true
         bitrate = 320
         username = mythmon@gmail.com
-        password = ${secrets.google-mopidy-app-password}
+        password = ${secrets.mopidy-google-password}
         radio_stations_in_browse = true
         radio_stations_as_playlists = true
         radio_stations_count = 10
-        deviceid = ${secrets.google-mopidy-device-id}
+        deviceid = ${secrets.mopidy-google-device-id}
         refresh_library = 1440
         refresh_playlists = 60
+
+        [spotify]
+        username = mythmon
+        password = ${secrets.mopidy-spotify-password}
+        bitrate = 320
+        toplist_countries = us
+        timeout = 30
       '';
     };
 
