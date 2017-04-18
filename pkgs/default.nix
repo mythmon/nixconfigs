@@ -26,10 +26,6 @@ let
       browserName = "nightly";
     };
 
-    irccloud-desktop = callPackage ./irccloud-desktop { };
-
-    pipenv = callPackage ./pipenv { };
-
     ripgrep = callPackage ./ripgrep { };
 
     yarn = callPackage ./yarn { };
