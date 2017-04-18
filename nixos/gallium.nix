@@ -194,6 +194,8 @@ in rec {
   services = {
     avahi.enable = true;
 
+    dbus.packages = [ pkgs.gnome3.dconf ];
+
     # Too much difficulty getting this to be performant
     # TODO: prunt git and hg directories?
     # locate.extraFlags = "--prunepaths='/nix/store /data/@oldlaptop-mut /.snapshot'"
@@ -282,7 +284,31 @@ in rec {
       useInotify = true;
     };
 
-    tlp.enable = true; # For power management
+    # power management
+    tlp = {
+      enable = true;
+      extraConfig = ''
+        CPU_SCALING_GOVERNOR_ON_AC=performance
+        CPU_SCALING_GOVERNOR_ON_BAT=powersave
+        CPU_MIN_PERF_ON_AC=0
+        CPU_MAX_PERF_ON_AC=100
+        CPU_MIN_PERF_ON_BAT=0
+        CPU_MAX_PERF_ON_BAT=100
+        CPU_BOOST_ON_AC=1
+        CPU_BOOST_ON_BAT=1
+
+        DISK_DEVICSE=nvme0n1
+        DISK_APM_LEVEL_ON_AC="254"
+        DISK_APM_LEVEL_ON_BAT="127"
+
+        # btrfs wants max_performance all the time
+        SATA_LINKPWR_ON_AC=max_performance
+        SATA_LINKPWR_ON_BAT=max_performance
+
+        DEVICES_TO_ENABLE_ON_AC="wifi"
+        DEVICES_TO_DISABLE_ON_BAT="bluetooth wwan"
+      '';
+    };
 
     xserver = {
       enable = true;
