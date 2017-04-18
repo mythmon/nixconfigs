@@ -10,6 +10,8 @@ let
 
     btrfs-snap = callPackage ./btrfs-snap { };
 
+    clac = callPackage ./clac { };
+
     flam3 = callPackage ./flam3 { };
 
     firefox-nightly-bin = callPackage ./firefox-bin {
