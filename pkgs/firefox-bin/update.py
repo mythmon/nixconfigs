@@ -30,11 +30,11 @@ def main():
 
     logger.info('Getting build for nightly')
     nightly = get_latest_build_for_date('nightly', datetime.now())
-    #logger.info('Getting build for aurora')
-    #aurora = get_latest_build_for_date('aurora', datetime.now())
+    logger.info('Getting build for aurora')
+    aurora = get_latest_build_for_date('aurora', datetime.now())
 
     print('{')
-    #print('  aurora = ' + indent(str(aurora), '  ').strip() + ';')
+    print('  aurora = ' + indent(str(aurora), '  ').strip() + ';')
     print('  nightly = ' + indent(str(nightly), '  ').strip() + ';')
     print('}')
 

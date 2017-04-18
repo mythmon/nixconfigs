@@ -14,17 +14,21 @@ let
 
     flam3 = callPackage ./flam3 { };
 
-    firefox-nightly-bin = callPackage ./firefox-bin {
-      browserName = "nightly";
+    firefox-beta-bin = callPackage ./firefox-bin {
+      browserName = "beta";
     };
 
     firefox-aurora-bin = callPackage ./firefox-bin {
       browserName = "aurora";
     };
 
-    firefox-unbranded-bin = callPackage ./firefox-unbranded-bin { };
+    firefox-nightly-bin = callPackage ./firefox-bin {
+      browserName = "nightly";
+    };
 
-    firefox-beta-unbranded-bin = callPackage ./firefox-beta-unbranded-bin { };
+    irccloud-desktop = callPackage ./irccloud-desktop { };
+
+    pipenv = callPackage ./pipenv { };
 
     ripgrep = callPackage ./ripgrep { };
 
