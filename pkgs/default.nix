@@ -26,6 +26,8 @@ let
       browserName = "nightly";
     };
 
+    pipenv = callPackage ./pipenv { };
+
     ripgrep = callPackage ./ripgrep { };
 
     yarn = callPackage ./yarn { };
