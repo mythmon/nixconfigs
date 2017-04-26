@@ -94,13 +94,14 @@ rec {
       keys = {
         mythmon_gallium = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPUecQEOHC/X1qX9ErEbp040MDQwv9v1ODB4176r3bFRfTOWL/9jm6hYH8oENnmKRS4b+KlLZoUabwRPX/eOy+Oomns0+zUEd/UT2C4qFQ68rsmrjNnei7ZXMYiw9g80e+y+OaFhVIgh5dhg+TXyfqpmnQmSeox0dfyyXuc9ctAqeaFFKQ29WGlg3vwcK6K9DTwhl7GAI7tf9PW9xTQbIBU9lg9UD4MAW9MxsI69a8ohvT0pUBEiaFsY3JThfrcsoynqRkvYQhBuz+kSAD2s9Q5gIXY9p5F8O7Cdl7iyfYrErIJAv1GtCNw8vY1pASl5Dphd7NzkFIJlrQ4xn1ukS3 mythmon@gallium";
         mythmon_gmail = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDb8mIhrDs4wX7bBEV+anf7Gh3m98lQ0MQbyfSClNjwPIF4BHwczOct6m2mr+V4ft5I8JGUDk2ke20v3+bR5NIsEtGh3fRd+KeLOVPiboIPWADAAqm4WSuW10ow3IPF6BLWv/3RnAv1l8tVbCdUz3i1U/ryFcOHS9BLdTy+tprfc8amEfNfVrx/WpwSl4eXZImsOaQAKvzAPsCSDK/2DOQ0NPfUD1ECm0AqxVBWemDCITP3g+GRMueRRo1ui89BvhnK+B8bApJeUVMw3Ltw0cgps2fKfeGqKf9Ree9Twt6Mpkr04owVLXCdNMU4p2ilhcWmgvVJRQxAfH1yx519vAtv mythmon@gmail.com";
+        mythmon_bigbeefy = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7aiSihxiO6RQZ2RuMXsJvxGwMBGmSVqrQb2zxRv1c8RtJBZ4lROcnji0tHL7Cg8Vel9XfW+0N7gEOrPN9c2WDN/AKhA9m6TbcJqAxAt3crAPzOg2KTcv0mZiQc+AMgnsbfC+SITQoUmX4LcQt6xx/QAGvUhk0jVw3hTA1AZ/ClA3hVDoTRL4VWYCL1hkKb5tcNisr/G6dGJAy/UD5OIzK4L7cAWu3s2OCDVSfINJtGPYEUP9ZdkjX1rg3BMuKgFjg5wyryY71k+A08NRUioWNadFdv9Er9LND4g30AWD8x+EZhholBg0u4+1WgCESI3tbE8y4LSKEYYUZRKWvvUiP mythmon@big-beefy";
         uberj_blue = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEAmBT7pbSrGPU7CpWYslgzoPYSfALaw4c6XPIlCQDKRzlSruhKTVizF2wGWyL4UB20xW08TAR0myNOXCz0NLVnxO5dRPMngqGSbTBqwzGkFic18T+CCcCgv1dVw3GD0TZkxF7w+oOjiH8VvlhciKMcF9Id8aBPF48ioGSbDTGNyeA0MTh+kJUx2EVbGxprfoHxjKrp1s8CiaV2LpKPgBnRLqB7BAFRph2ZuJTE8e4fGrh7iHp/N9QzqF7ts2CR2AJZexGaQKJBbVU1YNRtGn6Bji0oU0kRJ1MZJL8ttWztPSkIOTeAj1bWCpwZggjXKuwCdYUxJLXIrXcp13YnmVN uberj@blue";
         uberj_carbon = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyZNEN9j8oD5ZCXYcnUDbwEJbb5w1RkRR2dYXqOyFWptXBpLaBiVAVqQlq7GAqqn0vnLyANSr77RjxjadVKq8K4rcbwLIbeJglXumwYZNLzWt57JhZoptp9K1krvb1Fptyj5fpM0iBN8BAC2aCJwbe9OSOcccPMByHb8bQWDV849ZcA7Z2PfKqd3FoTQmRc28WXVb2Hki2xSVjrnYuoV0XSk1d0tXUysgl2acC5yc+I91DYl/iYu9RlcjrLUx05LpzIMwF9r2c2kleehgMESzrmRmll9FgomPNiNfL5BjP4Fiit0FFQo3uOiv3acDEmXcSYPEr0JMCx/drkfNXT/Bz uberj@uberj-ThinkPad-X1-Carbon";
       };
 
     in {
       root = {
-        openssh.authorizedKeys.keys = [ keys.mythmon_gallium keys.mythmon_gmail ];
+        openssh.authorizedKeys.keys = [ keys.mythmon_gallium keys.mythmon_gmail keys.mythmon_bigbeefy ];
       };
 
       mythmon = {
