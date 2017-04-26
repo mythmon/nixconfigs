@@ -29,6 +29,7 @@ rec {
         22 # ssh
         80 # http
         443 # https
+        9675 # dev
       ];
     };
 
@@ -77,7 +78,10 @@ rec {
       };
     };
 
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      gatewayPorts = "clientspecified";
+    };
 
     udev.extraRules = ''
       KERNEL=="eth*", ATTR{address}=="56:3d:61:1a:6a:67", NAME="eth0"
